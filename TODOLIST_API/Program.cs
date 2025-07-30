@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using TODOLIST_API.Context;
 using TODOLIST_API.DTO;
 using TODOLIST_API.Mapping;
+using TODOLIST_API.Models;
+using TODOLIST_API.Repository;
 using TODOLIST_API.Service;
 using TODOLIST_API.Validator;
 
@@ -19,8 +21,11 @@ builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IValidator<TodoInsertDto>, TodoInsertValidator>();
 builder.Services.AddScoped<IValidator<TodoUpdateDto>, TodoUpdateValidator>();
 
+//Repository
+builder.Services.AddScoped<ITodoRepository<TodoItem>, TodoRepository>();
 
 //Mappers
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddAutoMapper(typeof(UserProfile));
 
 builder.Services.AddControllers();
