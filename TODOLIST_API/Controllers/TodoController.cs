@@ -32,7 +32,7 @@ namespace TODOLIST_API.Controllers
         public async Task<IEnumerable<TodoDto>> Get() =>
             await _todoService.Get();
 
-        [HttpGet("{id}")]
+        [HttpGet("task/{id}")]
         public async Task<ActionResult<TodoDto>> GetTask(int id)
         {
             var itemDto = await _todoService.GetById(id);
@@ -40,14 +40,12 @@ namespace TODOLIST_API.Controllers
 
         }
 
-        [HttpGet("{isCompleted}")]
+        [HttpGet("task/status/{isCompleted}")]
         public async Task<ActionResult<IEnumerable<TodoDto>>> GetItemIsCompleted(bool isCompleted)
         {
             var itemDto = await _todoService.GetItemIsCompleted(isCompleted);
             return itemDto !=null ? Ok(itemDto) : NotFound();
         }
-
-
 
         [HttpPost]
         public async Task<ActionResult<TodoDto>> InsertItem(TodoInsertDto todoInsertDto)
